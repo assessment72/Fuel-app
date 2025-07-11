@@ -1,78 +1,38 @@
-main`:
-
-```yaml
-name: Build Fluttername: Build Flutter APK
-
-on:
-  push APK
+name: Build Flutter APK
 
 on:
   push:
     branches:
-:
-    branches:
-      - main  # غ      - main  # غيّره إلى 'master' إذا كان هذا هو اسم فرعك
-
-jobs:
-يّره إلى 'master' إذا كان هذا هو  build:
-    name اسم فرعك
+      - main  # غيّره إلى 'master' إذا كنت تستخدم هذا الفرع بدلاً
 
 jobs:
   build:
     name: Build Release APK
-    runs-on: ubuntu: Build Release APK
     runs-on: ubuntu-latest
-
-    steps-latest
 
     steps:
       - name: Checkout Repository
-       :
-      - name: Checkout Repository
-        uses: actions/checkout uses: actions/checkout@v3
-
-      - name@v3
+        uses: actions/checkout@v3
 
       - name: Set up Java
-       : Set up Java
-        uses: actions/setup uses: actions/setup-java@v3
-       -java@v3
+        uses: actions/setup-java@v3
         with:
-          with:
-          distribution: ' distribution: 'temurin'
-         temurin'
-          java-version: ' java-version: '17'
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name17'
-
-      - name: Set up Flutter: Set up Flutter
-        uses: sub
+      - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stableosito/flutter-action@v2
-        with'
-
-      - name::
           flutter-version: 'stable'
 
       - name: Get Dependencies
         run: flutter pub get
 
-      - name: Build APK Get Dependencies
+      - name: Build APK
         run: flutter build apk --release
-        run: flutter pub get
-
-      -
 
       - name: Upload APK Artifact
-        name: Build APK
-        run: flutter uses: actions/upload build apk --release
-
-      - name: Upload APK Artifact
-       -artifact@v4
-        with:
-          name: app-release-apk
-          path uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
