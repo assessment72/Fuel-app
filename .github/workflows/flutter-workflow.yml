@@ -3,16 +3,19 @@ name: Build Flutter APK
 on:
   push:
     branches:
-      - main  # غيّره إلى 'master' إذا كنت تستخدم هذا الفرع بدلاً
+      - main  # غيّره حسب اسم فرعك
 
 jobs:
   build:
-    name: Build Release APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Get Flutter Version from pubspec.yaml
+        id: get-flutter-version
+        uses: zgosalvez/github-actions-get-flutter-version-env@v2
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -23,9 +26,9 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: ${{ steps.get-flutter-version.outputs.version }}
 
-      - name: Get Dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
       - name: Build APK
